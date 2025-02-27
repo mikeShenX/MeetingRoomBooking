@@ -4,14 +4,14 @@ const initialData = {
     {
       id: 1,
       username: 'admin',
-      email: 'admin@example.com',
+      email: 'admin',
       password: 'admin123',
       role: 'admin'
     },
     {
       id: 2,
       username: 'user',
-      email: 'user@example.com',
+      email: 'user',
       password: 'user123',
       role: 'user'
     }
@@ -52,7 +52,6 @@ const initialData = {
   ]
 };
 
-// 获取本地存储数据或使用初始数据
 const getData = () => {
   const data = localStorage.getItem('mockData');
   if (!data) {
@@ -62,12 +61,10 @@ const getData = () => {
   return JSON.parse(data);
 };
 
-// 保存数据到本地存储
 const saveData = (data) => {
   localStorage.setItem('mockData', JSON.stringify(data));
 };
 
-// 生成新的ID
 const generateId = (items) => {
   return Math.max(...items.map(item => item.id), 0) + 1;
 };

@@ -1,6 +1,6 @@
 import { getData, saveData, generateId } from './mockData';
 
-// 获取所有预约
+
 export const getAllBookings = async () => {
   try {
     const data = getData();
@@ -10,7 +10,6 @@ export const getAllBookings = async () => {
   }
 };
 
-// 获取用户的预约
 export const getUserBookings = async (userId) => {
   try {
     const data = getData();
@@ -20,7 +19,7 @@ export const getUserBookings = async (userId) => {
   }
 };
 
-// 获取会议室的预约
+
 export const getRoomBookings = async (roomId) => {
   try {
     const data = getData();
@@ -30,7 +29,6 @@ export const getRoomBookings = async (roomId) => {
   }
 };
 
-// 创建预约
 export const createBooking = async (bookingData) => {
   try {
     const data = getData();
@@ -61,7 +59,7 @@ export const createBooking = async (bookingData) => {
   }
 };
 
-// 更新预约
+
 export const updateBooking = async (bookingId, bookingData) => {
   try {
     const data = getData();
@@ -70,7 +68,6 @@ export const updateBooking = async (bookingId, bookingData) => {
       throw { message: '预约不存在' };
     }
 
-    // 如果更新了时间，检查冲突
     if (bookingData.startTime || bookingData.endTime) {
       const { roomId } = data.bookings[index];
       const startTime = bookingData.startTime || data.bookings[index].startTime;
@@ -96,7 +93,6 @@ export const updateBooking = async (bookingId, bookingData) => {
   }
 };
 
-// 取消预约
 export const cancelBooking = async (bookingId) => {
   try {
     const data = getData();
@@ -105,7 +101,6 @@ export const cancelBooking = async (bookingId) => {
       throw { message: '预约不存在' };
     }
 
-    // 检查是否可以取消（比如是否已经开始）
     if (new Date(data.bookings[index].startTime) < new Date()) {
       throw { message: '无法取消已开始的预约' };
     }

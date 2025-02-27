@@ -1,6 +1,5 @@
 import { getData, saveData, generateId } from './mockData';
 
-// 获取所有会议室
 export const getAllRooms = async () => {
   try {
     const data = getData();
@@ -10,7 +9,6 @@ export const getAllRooms = async () => {
   }
 };
 
-// 获取单个会议室信息
 export const getRoomById = async (roomId) => {
   try {
     const data = getData();
@@ -24,7 +22,6 @@ export const getRoomById = async (roomId) => {
   }
 };
 
-// 添加新会议室（仅管理员）
 export const addRoom = async (roomData) => {
   try {
     const data = getData();
@@ -41,7 +38,6 @@ export const addRoom = async (roomData) => {
   }
 };
 
-// 更新会议室信息（仅管理员）
 export const updateRoom = async (roomId, roomData) => {
   try {
     const data = getData();
@@ -57,7 +53,6 @@ export const updateRoom = async (roomId, roomData) => {
   }
 };
 
-// 删除会议室（仅管理员）
 export const deleteRoom = async (roomId) => {
   try {
     const data = getData();
@@ -65,7 +60,6 @@ export const deleteRoom = async (roomId) => {
     if (index === -1) {
       throw { message: '会议室不存在' };
     }
-    // 检查是否有未完成的预约
     const hasBookings = data.bookings.some(b => 
       b.roomId === roomId && 
       new Date(b.endTime) > new Date()
