@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { getRooms } from '../../services/roomService';
 
 const MeetingRoom = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [meetingRooms, setMeetingRooms] = useState([]);
   const navigate = useNavigate();
 
-  // 处理预约按钮点击
+
+  useEffect(() => {
+    const rooms = getRooms();
+    
+    const formattedRooms = rooms.map(room => ({
+      ...room,
+      status: room.status === 'available' ? '空闲' : '使用中'
+    }));
+    setMeetingRooms(formattedRooms);
+  }, []);
+
   const handleBooking = (room) => {
     navigate('/booking', { state: { room } });
   };
 
-  // 处理查看详情按钮点击
   const handleViewDetails = (room) => {
     setSelectedRoom(room);
     setOpenDialog(true);
   };
 
-  // 关闭详情对话框
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedRoom(null);
   };
-
-  // 模拟会议室数据，后续将从API获取
-  const meetingRooms = [
-    { id: 1, name: '会议室A', capacity: 10, status: '空闲' },
-    { id: 2, name: '会议室B', capacity: 20, status: '使用中' },
-    { id: 3, name: '会议室C', capacity: 15, status: '空闲' },
-  ];
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>

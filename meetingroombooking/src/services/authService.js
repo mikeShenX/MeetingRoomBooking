@@ -24,8 +24,13 @@ const logout = () => {
   localStorage.removeItem('currentUser');
 };
 
+const isAdmin = () => {
+  const user = getCurrentUser();
+  return user?.role === 'admin';
+};
+
 const isAuthenticated = () => {
   return getCurrentUser() !== null;
 };
 
-export { login, getCurrentUser, logout, isAuthenticated };
+export { login, getCurrentUser, logout, isAuthenticated, isAdmin };

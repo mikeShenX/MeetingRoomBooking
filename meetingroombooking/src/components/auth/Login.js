@@ -18,8 +18,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(username, password);
-      console.log('登录成功:', data);
+      const data = await login(username, password);    
+      if(!data.success) 
+      {
+        setError("用户名或者密码不正确");
+      }
+      else
+      {
+        window.location.href = '/booking';
+      }
     } catch (err) {
       setError(err.message || '登录失败');
     }

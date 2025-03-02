@@ -1,0 +1,30 @@
+import './App.css';
+import React, { useState } from 'react';
+import { Box, CssBaseline } from '@mui/material';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Navigation from './components/layout/Navigation';
+import AppRoutes from './routes/AppRoutes';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
+  return (
+    <Router>
+      <CssBaseline />
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Navigation drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+        <AppRoutes />
+      </Box>
+    </Router>
+  );
+}
+
+export default App;
